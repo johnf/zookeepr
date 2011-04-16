@@ -1,8 +1,8 @@
 import logging
 import zookeepr.lib.helpers as h
 from pylons import request, response, session, tmpl_context as c
-from pylons.controllers.util import abort, redirect_to
-
+from pylons.controllers.util import abort
+import pylons
 from zookeepr.model import meta
 from zookeepr.model.db_content import DbContent, DbContentType
 
@@ -27,6 +27,7 @@ class HomeController(BaseController):
         __before__ code from SecureController here.
         """
 
+        print pylons.__version__
         if 'signed_in_person_id' in session:
             c.signed_in_person = self.dbsession.query(Person).filter_by(id=session['signed_in_person_id']).one()
         c.db_content = DbContent.find_by_url('/home', abort_404=False)

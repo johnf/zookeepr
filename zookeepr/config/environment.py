@@ -37,6 +37,7 @@ def load_environment(global_conf, app_conf):
     config['pylons.app_globals'] = app_globals.Globals(config)
     config['pylons.h'] = zookeepr.lib.helpers
     config['pylons.package'] = 'zookeepr'
+    config['pylons.strict_tmpl_context'] = False
 
     # Create the Mako TemplateLookup, with the default auto-escaping
     config['pylons.app_globals'].mako_lookup = TemplateLookup(

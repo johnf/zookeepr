@@ -39,6 +39,8 @@ from sqlalchemy.orm.util import object_mapper
 import itertools, re, Image
 from glob import glob
 
+from pylons.controllers.util import redirect
+
 def iterdict(items):
     return dict(items=items, iter=itertools.cycle(items))
 
@@ -542,7 +544,8 @@ def html_clean(str):
     cleaner = Cleaner(safe_attrs_only=True)
     return cleaner.clean_html(str)
     
-    
+def redirect_to(url):
+    return redirect(url_for(url))
     
 def url_for(*args, **kwargs):
     fields = dict(request.GET)
