@@ -14,7 +14,6 @@ def setup_app(command, conf, vars):
     if not pylons.test.pylonsapp:
         load_environment(conf.global_conf, conf.local_conf)
     """Place any commands to setup zookeepr here"""
-    load_environment(conf.global_conf, conf.local_conf)
 
     # Create the tables if they don't already exist
     log.info("Creating tables...")

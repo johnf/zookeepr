@@ -10,6 +10,12 @@ from zookeepr.model.meta import Session
 #import datetime
 #import random
 
+import pylons
+if float(pylons.__version__) >= 1.0:
+    Binary = sa.types.LargeBinary
+else:
+    Binary = sa.types.Binary 
+
 def setup(meta):
     pass
 
@@ -22,7 +28,7 @@ class FundingAttachment(Base):
     filename = sa.Column(sa.types.Text, key='_filename', nullable=False, default='attachment')
     content_type = sa.Column(sa.types.Text, key='_content_type', nullable=False, default='application/octet-stream')
 
-    content = sa.Column(sa.types.Binary, nullable=False)
+    content = sa.Column(Binary, nullable=False)
 
     creation_timestamp = sa.Column(sa.types.DateTime, nullable=False, default=sa.func.current_timestamp())
     last_creation_timestamp = sa.Column(sa.types.DateTime, nullable=False, default=sa.func.current_timestamp(), onupdate=sa.func.current_timestamp())
