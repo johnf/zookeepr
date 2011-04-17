@@ -22,6 +22,7 @@ import webhelpers.util as util
 
 from routes import request_config
 from routes.util import url_for as pylons_url_for
+from pylons import url
 
 from pylons import config, request, session
 
@@ -40,6 +41,8 @@ import itertools, re, Image
 from glob import glob
 
 from pylons.controllers.util import redirect
+
+from zookeepr.model import meta
 
 def iterdict(items):
     return dict(items=items, iter=itertools.cycle(items))
@@ -544,8 +547,11 @@ def html_clean(str):
     cleaner = Cleaner(safe_attrs_only=True)
     return cleaner.clean_html(str)
     
-def redirect_to(url):
-    return redirect(url_for(url))
+def redirect_to(*args, **kargs):
+    if 'is_active' in dir(meta.Session):
+        meta.Session.flush()
+        meta.Session.close()
+    return redirect(url.current(*args, **kargs))
     
 def url_for(*args, **kwargs):
     fields = dict(request.GET)

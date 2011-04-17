@@ -10,7 +10,8 @@ import time
 import PIL.Image
 
 from pylons import request, response, session, tmpl_context as c
-from pylons.controllers.util import abort, redirect_to
+from pylons.controllers.util import abort
+from zookeepr.lib.helpers import redirect_to
 from pylons.decorators import validate
 from pylons.decorators.rest import dispatch_on
 
@@ -22,7 +23,7 @@ from authkit.authorize.pylons_adaptors import authorize
 from webhelpers import paginate
 
 from zookeepr.config import lca_info as lca_info
-from zookeepr.config import zookeepr as zookeepr_config
+import zookeepr.config.zookeepr_config as zookeepr_config
 from zookeepr.lib.base import BaseController, render
 from zookeepr.lib import helpers as h
 from zookeepr.model import Person

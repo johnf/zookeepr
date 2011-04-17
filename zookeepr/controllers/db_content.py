@@ -1,7 +1,7 @@
 import logging
 
 from pylons import request, response, session, tmpl_context as c
-from pylons.controllers.util import redirect_to
+
 from pylons.decorators import validate
 from pylons.decorators.rest import dispatch_on
 
@@ -27,6 +27,8 @@ from webhelpers import paginate
 from pylons.controllers.util import abort
 
 from zookeepr.config.zookeepr_config import file_paths
+
+from zookeepr.lib.helpers import redirect_to
 
 import os
 import re
