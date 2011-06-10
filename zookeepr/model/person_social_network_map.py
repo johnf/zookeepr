@@ -3,11 +3,7 @@ import sqlalchemy as sa
 import re
 
 from meta import Base
-from zookeepr.model.meta import metadata
 #from social_network import SocialNetwork
-
-def setup(meta):
-    pass
 
 class PersonSocialNetworkMap(Base):
     """Stores both account login details and personal information.

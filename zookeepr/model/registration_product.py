@@ -1,15 +1,10 @@
 """The application's model objects"""
 import sqlalchemy as sa
 
-from meta import Base
-
-from zookeepr.model.meta import Session
+from meta import Session, Base
 
 from registration import Registration
 from product import Product
-
-def setup(meta):
-    pass
 
 class RegistrationProduct(Base):
     __tablename__ = 'registration_product_map'

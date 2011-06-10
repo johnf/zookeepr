@@ -1,7 +1,7 @@
 """The application's model objects"""
 import sqlalchemy as sa
 
-from meta import Base
+from meta import Session, Base
 
 from pylons.controllers.util import abort
 
@@ -13,11 +13,11 @@ from zookeepr.model.meta import Session
 import datetime
 import random
 
-def setup(meta):
+def setup():
     earlybird_end = datetime.datetime(2010, 10, 28, 23, 59, 59);
     nonearlybird_start = datetime.datetime(2010, 10, 29, 0, 0, 0,);
 
-    meta.Session.add_all(
+    Session.add_all(
         [
             Ceiling(name='conference-all', max_sold=None, available_from=None, available_until=None),
             Ceiling(name='conference-paid', max_sold=750, available_from=None, available_until=None),

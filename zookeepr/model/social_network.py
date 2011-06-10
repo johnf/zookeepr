@@ -3,13 +3,12 @@ import sqlalchemy as sa
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm.collections import attribute_mapped_collection
 
-from meta import Base
+from meta import Session, Base
 from pylons.controllers.util import abort
-from zookeepr.model.meta import Session
 from person_social_network_map import PersonSocialNetworkMap
 
-def setup(meta):
-    meta.Session.add_all(
+def setup():
+    Session.add_all(
         [
             SocialNetwork(name='Twitter', url='http://twitter.com/USER',
                           logo='tag_twitter.png'),

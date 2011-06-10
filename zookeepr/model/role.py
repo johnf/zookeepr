@@ -1,12 +1,12 @@
 """The application's model objects"""
 import sqlalchemy as sa
 
-from meta import Base
+from meta import Session, Base
 from pylons.controllers.util import abort
 from zookeepr.model.meta import Session
 
-def setup(meta):
-    meta.Session.add_all(
+def setup():
+    Session.add_all(
         [
             Role(name='organiser', pretty_name='Organizer', comment='Has full access to management pages'),
             Role(name='team', pretty_name='Core Team', comment='Member of core team'),
@@ -19,6 +19,7 @@ def setup(meta):
             Role(name='miniconfsonly', pretty_name='Miniconfs Only', comment='Only gives access to Monday and Tuesday'),
         ]
     )
+    pass
 
 class Role(Base):
     """Stores the roles used for authorisation

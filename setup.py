@@ -14,7 +14,7 @@ setup(
     url='http://zookeepr.org',
     install_requires=[
         "Pylons>=0.9.7",
-        "SQLAlchemy>=0.5",
+        "SQLAlchemy>=0.7",
         "AuthKit>=0.4.0",
         # FormEncode used to do form input validation
         "FormEncode>=0.6",
@@ -24,7 +24,7 @@ setup(
     setup_requires=["PasteScript>=1.6.3"],
     packages=find_packages(exclude=['ez_setup']),
     include_package_data=True,
-    test_suite = 'nose.collector',
+    test_suite='nose.collector',
     package_data={'zookeepr': ['i18n/*/LC_MESSAGES/*.mo',
         'templates/autohandler',
         'templates/*.myt',

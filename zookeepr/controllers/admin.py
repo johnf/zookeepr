@@ -1494,6 +1494,13 @@ class AdminController(BaseController):
         [Registrations,Accounts,Invoicing] """
 
         args = request.POST; post=True
+        c.r = None
+        c.p = None
+        c.i = None
+        c.id = None
+        c.error = None
+        c.many = None
+
         if not args:
             args = request.GET
             post = False

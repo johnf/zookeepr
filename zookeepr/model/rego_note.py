@@ -1,8 +1,6 @@
 import sqlalchemy as sa
 
-from meta import Base
-
-from zookeepr.model.meta import Session
+from meta import Session, Base
 
 from zookeepr.lib.model import CommaList
 

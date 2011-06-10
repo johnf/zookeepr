@@ -1,17 +1,12 @@
 """The application's model objects"""
 import sqlalchemy as sa
 
-from meta import Base
+from meta import Session, Base
 
 from pylons.controllers.util import abort
 
 from person import Person
 from product import Product
-
-from zookeepr.model.meta import Session
-
-def setup(meta):
-    pass
 
 class Voucher(Base):
     __tablename__ = 'voucher'

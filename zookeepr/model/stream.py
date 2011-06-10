@@ -1,12 +1,12 @@
 """The application's model objects"""
 import sqlalchemy as sa
 
-from meta import Base
+from meta import Session, Base
 
 from zookeepr.model.meta import Session
 
-def setup(meta):
-    meta.Session.add_all(
+def setup():
+    Session.add_all(
         [
             Stream(name='Free Love and Open Sensual Stimulation'),
         ]

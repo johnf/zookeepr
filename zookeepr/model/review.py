@@ -1,18 +1,14 @@
 """The application's model objects"""
 import sqlalchemy as sa
 
-from meta import Base
+from meta import Session, Base
 
 from person import Person
 
-from zookeepr.model.meta import Session
 from zookeepr.model.stream import Stream
 
 import datetime
 import random
-
-def setup(meta):
-    pass
 
 class Review(Base):
     """Stores both account login details and personal information.

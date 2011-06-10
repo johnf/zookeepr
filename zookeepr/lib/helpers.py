@@ -21,8 +21,7 @@ from lxml.html.clean import Cleaner
 import webhelpers.util as util
 
 from routes import request_config
-from routes.util import url_for as pylons_url_for
-from pylons import url
+from pylons import url as pylons_url
 
 from pylons import config, request, session
 
@@ -89,7 +88,8 @@ def cycle(*args, **kargs):
     else:
         items = args[0]
     name = kargs.get('name', 'default')
-    cycles = request_config().environ.setdefault('railshelpers.cycles', {})
+    print request_config()
+    cycles = request.environ.setdefault('railshelpers.cycles', {})
 
     cycle = cycles.setdefault(name, iterdict(items))
 
@@ -551,14 +551,22 @@ def redirect_to(*args, **kargs):
     if 'is_active' in dir(meta.Session):
         meta.Session.flush()
         meta.Session.close()
-    return redirect(url.current(*args, **kargs))
-    
-def url_for(*args, **kwargs):
+    return redirect(pylons_url.current(*args, **kargs))
+
+# Why do we do this?
+def url(*args, **kwargs):
+    if len(args) == 0 and len(kwargs) == 0:
+      return pylons_url.current()
+
     fields = dict(request.GET)
     extra = ''
     if fields.has_key('hash'):
         extra='?hash=' + fields['hash']
-    return pylons_url_for(*args, **kwargs) + extra
+    return pylons_url(*args, **kwargs) + extra
+
+def url_for(*args, **kwargs):
+    # FIXME url_for is deprectaed we should remove it
+    return url(*args, **kwargs)
 
 def list_to_string(list, primary_join='%s and %s', secondary_join=', ', html = False):
     if html:

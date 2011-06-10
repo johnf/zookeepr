@@ -1,16 +1,11 @@
 """The application's model objects"""
 import sqlalchemy as sa
 
-from meta import Base
-
-from zookeepr.model.meta import Session
+from meta import Session, Base
 
 import hashlib
 import datetime
 import random
-
-def setup(meta):
-    pass
 
 class URLHash(Base):
     """ Stores a unique has for various access """

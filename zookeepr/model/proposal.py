@@ -1,11 +1,9 @@
 """The application's model objects"""
 import sqlalchemy as sa
 
-from meta import Base
+from meta import Session, Base
 
 from pylons.controllers.util import abort
-
-from zookeepr.model.meta import Session
 
 from person import Person
 from person_proposal_map import person_proposal_map
@@ -13,8 +11,8 @@ from attachment import Attachment
 from review import Review
 from stream import Stream
 
-def setup(meta):
-    meta.Session.add_all(
+def setup():
+    Session.add_all(
         [
             ProposalStatus(name='Accepted'),
             ProposalStatus(name='Rejected'),
@@ -23,7 +21,7 @@ def setup(meta):
             ProposalStatus(name='Backup'),
         ]
     )
-    meta.Session.add_all(
+    Session.add_all(
         [
             ProposalType(name='Presentation'),
             ProposalType(name='Miniconf'),
@@ -32,13 +30,13 @@ def setup(meta):
             ProposalType(name='Poster'),
         ]
     )
-    meta.Session.add_all(
+    Session.add_all(
         [
             TravelAssistanceType(name='I do not require travel assistance.'),
             TravelAssistanceType(name='I request that linux.conf.au book and pay for air travel.'),
         ]
     )
-    meta.Session.add_all(
+    Session.add_all(
         [
             TargetAudience(name='Community'),
             TargetAudience(name='User'),
@@ -46,7 +44,7 @@ def setup(meta):
             TargetAudience(name='Business'),
         ]
     )
-    meta.Session.add_all(
+    Session.add_all(
         [
             AccommodationAssistanceType(name='I do not require accommodation assistance.'),
             AccommodationAssistanceType(name='I request that linux.conf.au provide student-style single room accommodation for the duration of the conference.'),

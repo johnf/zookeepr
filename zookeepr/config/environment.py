@@ -2,8 +2,7 @@
 import os
 
 from mako.lookup import TemplateLookup
-#from zookeepr.lib.template import ZookeeprTemplateLookup as TemplateLookup
-from pylons import config
+from pylons.configuration import PylonsConfig
 from pylons.error import handle_mako_error
 from sqlalchemy import engine_from_config
 
@@ -15,12 +14,12 @@ from zookeepr.model import init_model
 from zookeepr.config.lca_info import lca_info
 from zookeepr.config.zookeepr_config import file_paths
 
-from pylons.configuration import PylonsConfig
-
 def load_environment(global_conf, app_conf):
     """Configure the Pylons environment via the ``pylons.config``
     object
     """
+    config = PylonsConfig()
+
     # Pylons paths
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     paths = dict(root=root,
@@ -36,8 +35,11 @@ def load_environment(global_conf, app_conf):
     config['routes.map'] = make_map(config)
     config['pylons.app_globals'] = app_globals.Globals(config)
     config['pylons.h'] = zookeepr.lib.helpers
-    config['pylons.package'] = 'zookeepr'
-    config['pylons.strict_tmpl_context'] = False
+
+    # Setup cache object as early as possible
+    import pylons
+    pylons.cache._push_object(config['pylons.app_globals'].cache)
+
 
     # Create the Mako TemplateLookup, with the default auto-escaping
     config['pylons.app_globals'].mako_lookup = TemplateLookup(
@@ -53,8 +55,5 @@ def load_environment(global_conf, app_conf):
 
     # CONFIGURATION OPTIONS HERE (note: all config options will override
     # any Pylons config options)
-    
-    return config
-    
-config = PylonsConfig()
 
+    return config

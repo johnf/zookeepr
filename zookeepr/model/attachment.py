@@ -16,9 +16,6 @@ if float(pylons.__version__) >= 1.0:
 else:
     Binary = sa.types.Binary 
 
-def setup(meta):
-    pass
-
 class Attachment(Base):
     __tablename__ = 'attachment'
 

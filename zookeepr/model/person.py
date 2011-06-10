@@ -1,9 +1,9 @@
 """The application's model objects"""
 import sqlalchemy as sa
-from sqlalchemy.ext.associationproxy import association_proxy 
+from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm.collections import attribute_mapped_collection
 
-from meta import Base
+from meta import Session, Base
 
 from pylons.controllers.util import abort
 
@@ -13,13 +13,13 @@ from social_network import SocialNetwork
 from person_social_network_map import PersonSocialNetworkMap
 from special_registration import SpecialRegistration
 
-from zookeepr.model.meta import Session
+from zookeepr.model.meta import Session, Base
 
 import datetime
 import hashlib
 import random
 
-def setup(meta):
+def setup():
     person = Person(
         email_address="admin@zookeepr.org",
         activated=True,
@@ -32,11 +32,10 @@ def setup(meta):
     role = Role.find_by_name('organiser')
     person.roles.append(role)
 
-    meta.Session.add(person)
+    Session.add(person)
 
 class Person(Base):
-    """Stores both account login details and personal information.
-    """
+    """Stores both account login details and personal information."""
     __tablename__ = 'person'
 
     id = sa.Column(sa.types.Integer, primary_key=True)

@@ -1,12 +1,11 @@
 """The application's model objects"""
 import sqlalchemy as sa
 
-from meta import Base
+from meta import Session, Base
 
-from zookeepr.model.meta import Session
 
-def setup(meta):
-    meta.Session.add_all(
+def setup():
+    Session.add_all(
         [
             ProductCategory(name='Ticket', description='Please choose your registration type. See <a href="/register/prices" target="_blank">the website</a> for a description of what is included in each ticket type.', display='radio', min_qty=1, max_qty=1, display_order=1),
             ProductCategory(name='T-Shirt', description='Please choose how many t-shirts you would like.', note='One t-shirt is free with your registration, and one t-shirt is free with every adult Partner Programme ticket purchased. Any additional t-shirts are $25.00 each. More details and measurements on t-shirt sizes can be found on the <a href="/register/shirts" target="_blank">registration information</a>.', display='qty', display_mode='shirt', min_qty=1, max_qty=100, display_order=10),

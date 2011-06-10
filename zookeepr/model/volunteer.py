@@ -1,18 +1,13 @@
 import sqlalchemy as sa
 
-from meta import Base
+from meta import Session, Base
 
 from pylons.controllers.util import abort
-
-from zookeepr.model.meta import Session
 
 from zookeepr.lib.model import CommaList
 
 from person import Person
 from product import Product
-
-def setup(meta):
-    pass
 
 class Volunteer(Base):
     """Information about a potential volunteer

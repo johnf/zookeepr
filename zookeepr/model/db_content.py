@@ -1,7 +1,7 @@
 """The application's model objects"""
 import sqlalchemy as sa
 
-from meta import Base
+from meta import Session, Base
 
 from pylons.controllers.util import abort
 
@@ -13,8 +13,8 @@ from zookeepr.model.meta import Session
 import datetime
 import random
 
-def setup(meta):
-    meta.Session.add_all(
+def setup():
+    Session.add_all(
         [
             DbContentType(name='Page'),
             DbContentType(name='News'),

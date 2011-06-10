@@ -2,14 +2,9 @@
 from datetime import datetime, date, time
 import sqlalchemy as sa
 
-from meta import Base
+from meta import Session, Base
 
 from pylons.controllers.util import abort
-
-from zookeepr.model.meta import Session
-
-def setup(meta):
-    pass
 
 class Schedule(Base):
     __tablename__ = 'schedule'

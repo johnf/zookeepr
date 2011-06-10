@@ -1,11 +1,6 @@
 import sqlalchemy as sa
 
-from meta import Base
-
-from zookeepr.model.meta import Session
-
-def setup(meta):
-    pass
+from meta import Session, Base
 
 class SpecialRegistration(Base):
     """Stores details of a person who used a special offer to register early

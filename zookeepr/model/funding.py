@@ -1,7 +1,7 @@
 """The application's model objects"""
 import sqlalchemy as sa
 
-from meta import Base
+from meta import Session, Base
 from pylons.controllers.util import abort
 from zookeepr.model.meta import Session
 from zookeepr.lib.model import CommaList
@@ -9,8 +9,8 @@ from zookeepr.lib.model import CommaList
 from person import Person
 from funding_attachment import FundingAttachment
 
-def setup(meta):
-   meta.Session.add_all(
+def setup():
+   Session.add_all(
         [
             FundingStatus(name='Accepted'),
             FundingStatus(name='Declined'),
@@ -18,7 +18,7 @@ def setup(meta):
             FundingStatus(name='Withdrawn'),
         ]
    )
-   meta.Session.add_all(
+   Session.add_all(
         [
             FundingType(name='Google Diversity Programme',
               note='Assists people from diverse groups, including females in IT and disabled people', active=True),

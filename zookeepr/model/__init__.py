@@ -1,9 +1,7 @@
 """The application's model objects"""
-import sqlalchemy as sa
-from sqlalchemy import orm
-from sqlalchemy.exceptions import IntegrityError
+from zookeepr.model.meta import Session, Base
 
-from zookeepr.model import meta
+from sqlalchemy.exc import IntegrityError
 
 import person
 import role
@@ -73,42 +71,28 @@ from url_hash import URLHash
 
 def init_model(engine):
     """Call me before using any of the tables or classes in the model"""
-    meta.Session.configure(bind=engine)
-    meta.engine = engine
+    Session.configure(bind=engine)
 
-def setup(meta):
+
+def setup():
     """Setup any data in the tables"""
     try:
-        role.setup(meta)
-        person_role_map.setup(meta)
-        person.setup(meta)
+        role.setup()
+        person.setup()
 
-        social_network.setup(meta)
-        person_social_network_map.setup(map)
+        social_network.setup()
 
-        product_category.setup(meta)
-        ceiling.setup(meta)
-        product.setup(meta)
+        product_category.setup()
+        ceiling.setup()
+        product.setup()
 
-        proposal.setup(meta)
-        person_proposal_map.setup(meta)
-        attachment.setup(meta)
-        review.setup(meta)
-        voucher.setup(meta)
+        proposal.setup()
 
-        db_content.setup(meta)
-        volunteer.setup(meta)
+        db_content.setup()
 
-        payment.setup(meta)
-        payment_received.setup(meta)
+        funding.setup()
 
-        funding.setup(meta)
-        funding_attachment.setup(meta)
-
-        special_offer.setup(meta)
-        special_registration.setup(meta)
-
-        meta.Session.commit()
+        Session.commit()
     except IntegrityError, inst:
         print inst
 
